@@ -27,7 +27,7 @@ const BlogThree = () => {
         {"(1) internet browser - manage deployments / check 3rd party tools."}
       </p>
       <p className="blog-content">
-        {"(2) ai (app or webpage) - learn new concepts / create boilerplate"}
+        {"(2) ai (app or cli) - learn new concepts / create boilerplate"}
       </p>
       <p className="blog-content">
         {"(3) code editor - git / code changes / deploy local apps"}
