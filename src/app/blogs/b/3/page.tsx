@@ -58,7 +58,7 @@ const BlogThree = () => {
       </p>
 
       <img
-        src="/setupdiagram.jpg"
+        src="/setupdiagram.png"
         alt="setup diagram"
         className="w-full rounded-lg border border-zinc-800 my-4"
       />
