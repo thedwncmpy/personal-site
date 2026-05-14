@@ -146,6 +146,7 @@ export const urls = [
   },
 ];
 
+// commend
 export const blogs = [
   {
     id: "1",
@@ -153,7 +154,7 @@ export const blogs = [
     displaydate: "jul 01 2025",
     date: "2025-07-01",
     url: "/blogs/b/1",
-    content: ""
+    content: "",
   },
   {
     id: "2",
@@ -161,7 +162,7 @@ export const blogs = [
     displaydate: "mar 27 2026",
     date: "2026-03-27",
     url: "/blogs/b/2",
-    content: ""
+    content: "",
   },
   {
     id: "3",
@@ -169,6 +170,6 @@ export const blogs = [
     displaydate: "mar 30 2026",
     date: "2026-03-30",
     url: "/blogs/b/3",
-    content: ""
+    content: "",
   },
 ];
