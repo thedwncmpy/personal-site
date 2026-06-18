@@ -26,7 +26,7 @@ const BlogOne = () => {
           "learning about all of the shortcuts keybindings, being able to use lazyvim like legos and add plugins like lazygit made my experience more enjoyable/productive and showed me the world of incredible tools that very talented developers have created."
         }
       </p>
-      <p className="text-lg font-bold">
+      <p className="blog-section-heading">
         {"now how does all of this make me a better vscode user?"}
       </p>
       <p className="blog-content">

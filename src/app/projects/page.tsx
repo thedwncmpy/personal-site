@@ -4,16 +4,18 @@ import Link from "next/link";
 import { HiArrowUpRight } from "react-icons/hi2";
 
 export default function Projects() {
+  const visibleProjects = projects.filter((projectItem) => projectItem.visible);
+
   return (
     <div>
       <Header title="projects" />
       <div className="projects-blob">
         {
-          "here are some of the projects i've worked on. i like developing personal projects and working with apis (like spotify) to develop fun tools. some other projects featured were some work i have done for clients."
+          "here are some of the projects i've worked on. i like developing personal projects and working with apis (like spotify) to build fun tools. some of these are also projects i have done for clients."
         }
       </div>
       <div>
-        {projects.map((projectItem, id) => (
+        {visibleProjects.map((projectItem, id) => (
           <Link key={id} href={projectItem.url}>
             <div className="my-10 border border-light-grey p-8 hover:border-light-green group">
               <div className="text-3xl font-bold group-hover:text-light-green flex items-center justify-between">

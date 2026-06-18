@@ -7,7 +7,7 @@ const BlogTwo = () => {
   return (
     <BlogLayout title={blog.name} displaydate={blog.displaydate}>
       <br />
-      <p className="text-lg font-bold">
+      <p className="blog-section-heading">
         {"tldr"}
       </p>
       <p className="blog-content">
@@ -16,7 +16,7 @@ const BlogTwo = () => {
         }
       </p>
       <br />
-      <p className="text-lg font-bold">
+      <p className="blog-section-heading">
         {"1.1 overview"}
       </p>
       <p className="blog-content">
@@ -41,7 +41,7 @@ const BlogTwo = () => {
       </p>
 
       <br />
-      <p className="text-lg font-bold">
+      <p className="blog-section-heading">
         {"1.2 hypothesis"}
       </p>
       <p className="blog-content">
@@ -51,10 +51,10 @@ const BlogTwo = () => {
       </p>
 
       <br />
-      <p className="text-lg font-bold">
+      <p className="blog-section-heading">
         {"1.4 evidence"}
       </p>
-      <p className="blog-content">
+      <p className="blog-content blog-subheading">
         {
           'apple notes collapsed'
         }
@@ -67,7 +67,7 @@ const BlogTwo = () => {
         playsInline
         className="w-full rounded-lg border border-zinc-800 my-4"
       />
-      <p className="blog-content">
+      <p className="blog-content blog-subheading">
         {
           'notion'
         }
@@ -80,7 +80,7 @@ const BlogTwo = () => {
         playsInline
         className="w-full rounded-lg border border-zinc-800 my-4"
       />
-      <p className="blog-content">
+      <p className="blog-content blog-subheading">
         {
           'apple notes expanded'
         }

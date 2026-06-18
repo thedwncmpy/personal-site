@@ -7,14 +7,14 @@ const BlogThree = () => {
   return (
     <BlogLayout title={blog.name} displaydate={blog.displaydate}>
       <br />
-      <p className="text-lg font-bold">{"tldr"}</p>
+      <p className="blog-section-heading">{"tldr"}</p>
       <p className="blog-content">
         {
           "ipad could be used as a computer replacement if you have another device that you can ssh into for code heavy tasks. ipad os has its quirks but you can still use it as a lightweight ssh client."
         }
       </p>
       <br />
-      <p className="text-lg font-bold">{"1.1 overview"}</p>
+      <p className="blog-section-heading">{"1.1 overview"}</p>
       <p className="blog-content">
         {
           "like the title suggests i’m daily driving an ipad to do all of my work. i acquired this ipad through a series of csgo like trade ups. i traded up from a 2018 ipad with the a12x bionic chip to a used m5 unit with a like new apple keyboard case. all in, i spent 800 bucks on a +$1800 setup."
@@ -22,7 +22,7 @@ const BlogThree = () => {
       </p>
 
       <br />
-      <p className="blog-content">{"the things i need in a “computer”: "}</p>
+      <p className="blog-content blog-subheading">{"the things i need in a “computer”: "}</p>
       <p className="blog-content">
         {"(1) internet browser - manage deployments / check 3rd party tools."}
       </p>
@@ -44,8 +44,8 @@ const BlogThree = () => {
       </p>
 
       <br />
-      <p className="text-lg font-bold">{"1.2 dev setup"}</p>
-      <p className="blog-content">{"notion calendar"}</p>
+      <p className="blog-section-heading">{"1.2 dev setup"}</p>
+      <p className="blog-content blog-subheading">{"notion calendar"}</p>
       <img
         src="/notioncal.png"
         alt="notion calendar"
@@ -63,7 +63,7 @@ const BlogThree = () => {
         className="w-full rounded-lg border border-zinc-800 my-4"
       />
 
-      <p className="blog-content">{"editor demo"}</p>
+      <p className="blog-content blog-subheading">{"editor demo"}</p>
       <video
         src="/editordemo.mp4"
         autoPlay
@@ -117,7 +117,7 @@ const BlogThree = () => {
         {" library."}
       </p>
 
-      <p className="blog-content">{"developer tools"}</p>
+      <p className="blog-content blog-subheading">{"developer tools"}</p>
       <img
         src="/devtools.png"
         alt="developer tools"
@@ -125,14 +125,14 @@ const BlogThree = () => {
       />
       <br />
 
-      <p className="text-lg font-bold">{"1.3 latency"}</p>
+      <p className="blog-section-heading">{"1.3 latency"}</p>
       <p className="blog-content">
         {
           "for these test the tailscale vpn is active and i'm running a simple ping test, but since termius forces you to be in an ssh session by default (no local environment) i ran the test from mac mini to ipad. i would enable mosh but it forces neovim to fallback to a basic, colorless display mode and causes noticeably worse artifacting."
         }
       </p>
 
-      <p className="blog-content">{"phone hotspot"}</p>
+      <p className="blog-content blog-subheading">{"phone hotspot"}</p>
       <div className="bg-[#1e1e1e] p-6 rounded-lg font-mono text-sm overflow-x-auto">
         <pre className="text-gray-300">
           <code className="whitespace-pre">
@@ -154,7 +154,7 @@ round-trip min/avg/max/stddev = 31.353/186.967/302.090/87.248 ms`}
           </code>
         </pre>
       </div>
-      <p className="blog-content">{"home network (fiber)"}</p>
+      <p className="blog-content blog-subheading">{"home network (fiber)"}</p>
       <div className="bg-[#1e1e1e] p-6 rounded-lg font-mono text-sm overflow-x-auto">
         <pre className="text-gray-300">
           <code className="whitespace-pre">
@@ -178,7 +178,7 @@ round-trip min/avg/max/stddev = 5.813/34.059/75.061/23.302 ms`}
       </div>
 
       <br />
-      <p className="text-lg font-bold">{"1.4 closing thoughts"}</p>
+      <p className="blog-section-heading">{"1.4 closing thoughts"}</p>
       <p className="blog-content">
         {
           "my ability to create code has not suffered since the migration. The navigation between apps and through the terminal feels snappy. I’m offloading all high-bandwidth and CPU-intensive tasks to a fiber-backed Mac Mini. I get desktop speeds over a hotspot with a fraction of the local battery drain. "

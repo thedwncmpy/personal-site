@@ -74,6 +74,7 @@ export const work = [
 export const projects = [
   {
     name: "aremes fermentis",
+    visible: true,
     role: "developer & designer",
     desc: "transfer legacy system to shopify, and redesign site according to brand identity. integrate shop with 3rd party vendors like macy's",
     url: "https://aremesfermentis.com",
@@ -87,6 +88,7 @@ export const projects = [
   },
   {
     name: "drive clone",
+    visible: true,
     role: "developer & creator",
     desc: "simple google drive clone with user management(clerk), rate limits, analytics(posthog), site health analytics(sentry), and file/image upload (uploadthing)",
     url: "https://drive-klone.netlify.app",
@@ -100,6 +102,7 @@ export const projects = [
   },
   {
     name: "so plumbing inc",
+    visible: true,
     role: "site creator & designer",
     desc: "in the process of remaking company site to something more modern, which displays company information(licenses and contact info)first and foremost",
     url: "https://so-plumbing-inc.vercel.app",
@@ -112,6 +115,7 @@ export const projects = [
   },
   {
     name: "personal site v3",
+    visible: false,
     role: "developer & designer",
     desc: "learning how to use tools like aceturnity for flashy animations, and shadcn for nicely styled components",
     url: "https://personal-animated-personal-site-team.vercel.app",
@@ -124,6 +128,7 @@ export const projects = [
   },
   {
     name: "biovizit",
+    visible: true,
     role: "prototyper",
     desc: "create prototype company looking to move their online tool from free to use to closed. setup user registration, payment capture, and auth",
     url: "https://biovizit.webflow.io",
@@ -158,7 +163,7 @@ export const blogs = [
     name: "how using neovim made me a vscode user",
     displaydate: "jul 01 2025",
     date: "2025-07-01",
-    url: "/blogs/b/1",
+    url: "/blogs/1",
     content: "",
   },
   {
@@ -166,7 +171,7 @@ export const blogs = [
     name: "ios notes < notion",
     displaydate: "mar 27 2026",
     date: "2026-03-27",
-    url: "/blogs/b/2",
+    url: "/blogs/2",
     content: "",
   },
   {
@@ -174,7 +179,18 @@ export const blogs = [
     name: "ipad as dev",
     displaydate: "mar 30 2026",
     date: "2026-03-30",
-    url: "/blogs/b/3",
+    url: "/blogs/3",
+    content: "",
+  },
+];
+
+export const documents = [
+  {
+    id: "1",
+    name: "notion-cli user guide",
+    displaydate: "jun 18 2026",
+    date: "2026-06-18",
+    url: "/docs/1",
     content: "",
   },
 ];

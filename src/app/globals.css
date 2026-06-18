@@ -96,6 +96,12 @@
   .blog-content {
     @apply leading-8 text-lg my-4;
   }
+  .blog-section-heading {
+    @apply text-lg font-bold text-light-green;
+  }
+  .blog-subheading {
+    @apply text-light-green;
+  }
 }
 
 @keyframes arrow-float {
