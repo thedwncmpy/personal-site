@@ -4,7 +4,7 @@ import Link from "next/link";
 import AnimatedLink from "./animated-link";
 
 const Project = () => {
-  const visibleProjects = projects.filter((projectItem) => projectItem.featured);
+  const visibleProjects = projects.filter((projectItem) => projectItem.visible);
 
   return (
     <div>
