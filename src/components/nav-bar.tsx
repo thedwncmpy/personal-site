@@ -27,6 +27,9 @@ const NavBar: React.FC = () => {
         case "b":
           router.push("/blogs");
           break;
+        case "d":
+          router.push("/docs");
+          break;
         default:
           break;
       }

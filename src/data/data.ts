@@ -14,6 +14,11 @@ export const nav = [
     title: "blogs",
     url: "/blogs",
   },
+  {
+    symbol: "[d]",
+    title: "docs",
+    url: "/docs",
+  },
 ];
 
 export const profile = {
