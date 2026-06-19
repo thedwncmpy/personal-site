@@ -73,8 +73,24 @@ export const work = [
 
 export const projects = [
   {
+    name: "ns-cli",
+    visible: true,
+    featured: true,
+    role: "creator & maintainer",
+    desc: "command-line tool for syncing local markdown notes with a notion database, including project mapping, upload/download workflows, and shell completion.",
+    url: "https://github.com/thedwncmpy/notion-cli.git",
+    displaydate: "",
+    date: "",
+    points: [
+      "built bidirectional markdown and notion sync flows around a single `ns` command",
+      "designed directory mapping and config management for scoped project sync",
+      "documented command behavior, setup, and sync rules for day-to-day usage",
+    ],
+  },
+  {
     name: "aremes fermentis",
     visible: true,
+    featured: true,
     role: "developer & designer",
     desc: "transfer legacy system to shopify, and redesign site according to brand identity. integrate shop with 3rd party vendors like macy's",
     url: "https://aremesfermentis.com",
@@ -89,6 +105,7 @@ export const projects = [
   {
     name: "drive clone",
     visible: true,
+    featured: true,
     role: "developer & creator",
     desc: "simple google drive clone with user management(clerk), rate limits, analytics(posthog), site health analytics(sentry), and file/image upload (uploadthing)",
     url: "https://drive-klone.netlify.app",
@@ -103,6 +120,7 @@ export const projects = [
   {
     name: "so plumbing inc",
     visible: true,
+    featured: true,
     role: "site creator & designer",
     desc: "in the process of remaking company site to something more modern, which displays company information(licenses and contact info)first and foremost",
     url: "https://so-plumbing-inc.vercel.app",
@@ -116,6 +134,7 @@ export const projects = [
   {
     name: "personal site v3",
     visible: false,
+    featured: false,
     role: "developer & designer",
     desc: "learning how to use tools like aceturnity for flashy animations, and shadcn for nicely styled components",
     url: "https://personal-animated-personal-site-team.vercel.app",
@@ -129,6 +148,7 @@ export const projects = [
   {
     name: "biovizit",
     visible: true,
+    featured: false,
     role: "prototyper",
     desc: "create prototype company looking to move their online tool from free to use to closed. setup user registration, payment capture, and auth",
     url: "https://biovizit.webflow.io",

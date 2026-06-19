@@ -4,7 +4,9 @@ import Link from "next/link";
 import AnimatedLink from "./animated-link";
 
 const Project = () => {
-  const visibleProjects = projects.filter((projectItem) => projectItem.visible);
+  const featuredProjects = projects.filter(
+    (projectItem) => projectItem.visible && projectItem.featured
+  );
 
   return (
     <div>
@@ -12,7 +14,7 @@ const Project = () => {
         <span className=" text-light-green">{"* "}</span>projects
       </h3>
       <div>
-        {visibleProjects.map((projectItem, id) => (
+        {featuredProjects.map((projectItem, id) => (
           <Link href={projectItem.url} className="group" key={id}>
             <h4 className="project-heading group-hover:text-light-green">
               {projectItem.name}
