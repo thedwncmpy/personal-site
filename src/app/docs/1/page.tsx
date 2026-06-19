@@ -1,4 +1,6 @@
 import React from "react";
+import Link from "next/link";
+import { FaGithub } from "react-icons/fa";
 import BlogLayout from "@/components/blog-layout";
 import { documents as content } from "@/data/data";
 
@@ -23,6 +25,17 @@ const DocumentOne = () => {
 
   return (
     <BlogLayout title={document.name} displaydate={document.displaydate}>
+      <p className="blog-content">
+        <Link
+          href="https://github.com/thedwncmpy/notion-cli.git"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-light-green underline underline-offset-4"
+        >
+          <FaGithub aria-hidden="true" />
+          <span>{"thedwncmpy/notion-cli"}</span>
+        </Link>
+      </p>
       <p className="blog-content">
         {"`notion-cli` syncs Markdown files in a local notes tree with a Notion database through the `ns` command."}
       </p>
