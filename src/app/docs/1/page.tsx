@@ -27,7 +27,7 @@ const DocumentOne = () => {
     <BlogLayout title={document.name} displaydate={document.displaydate}>
       <p className="blog-content">
         <Link
-          href="https://github.com/thedwncmpy/notion-cli.git"
+          href="https://github.com/thedwncmpy/ns-cli.git"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 text-light-green underline underline-offset-4"
@@ -37,7 +37,9 @@ const DocumentOne = () => {
         </Link>
       </p>
       <p className="blog-content">
-        {"`notion-cli` syncs Markdown files in a local notes tree with a Notion database through the `ns` command."}
+        {
+          "`ns-cli` syncs Markdown files in a local notes tree with a Notion database through the `ns` command."
+        }
       </p>
       <p className="blog-content">
         {
@@ -48,9 +50,17 @@ const DocumentOne = () => {
       <br />
       <SectionTitle>{"what the cli does"}</SectionTitle>
       <Bullet>{"- uses exact filename-to-page-title matching."}</Bullet>
-      <Bullet>{"- uses first-level directory mappings to scope relation-based sync."}</Bullet>
-      <Bullet>{"- stores project config in `.notion-cli/config.json` under your notes root."}</Bullet>
-      <Bullet>{"- stores downloaded page metadata in `.notion-cli/pages//*.json`."}</Bullet>
+      <Bullet>
+        {"- uses first-level directory mappings to scope relation-based sync."}
+      </Bullet>
+      <Bullet>
+        {
+          "- stores project config in `.notion-cli/config.json` under your notes root."
+        }
+      </Bullet>
+      <Bullet>
+        {"- stores downloaded page metadata in `.notion-cli/pages//*.json`."}
+      </Bullet>
       <Bullet>{"- uploads Markdown to Notion."}</Bullet>
       <Bullet>{"- downloads Notion pages to Markdown."}</Bullet>
       <Bullet>{"- fails hard on ambiguous matches."}</Bullet>
@@ -61,7 +71,9 @@ const DocumentOne = () => {
       <Bullet>{"- `python3`"}</Bullet>
       <Bullet>{"- `jq`"}</Bullet>
       <Bullet>{"- `curl`"}</Bullet>
-      <Bullet>{"- a Notion integration token with access to the target database"}</Bullet>
+      <Bullet>
+        {"- a Notion integration token with access to the target database"}
+      </Bullet>
 
       <br />
       <SectionTitle>{"authentication"}</SectionTitle>
@@ -69,7 +81,9 @@ const DocumentOne = () => {
         {"set `NOTION_TOKEN` in either of these places:"}
       </p>
       <CodeBlock>{`export NOTION_TOKEN="secret_xxx"`}</CodeBlock>
-      <p className="blog-content">{"or in `~/.config/notion-cli/secrets.zsh`:"}</p>
+      <p className="blog-content">
+        {"or in `~/.config/notion-cli/secrets.zsh`:"}
+      </p>
       <CodeBlock>{`export NOTION_TOKEN="secret_xxx"`}</CodeBlock>
       <p className="blog-content">
         {"environment variables take precedence over the secrets file."}
@@ -80,31 +94,45 @@ const DocumentOne = () => {
       <p className="blog-content">{"initialize a notes tree:"}</p>
       <CodeBlock>{`ns init --database-id <database_id> --notes-root ./notes`}</CodeBlock>
       <p className="blog-content">
-        {"if your Notion database title property is not named `Name`, set it explicitly:"}
+        {
+          "if your Notion database title property is not named `Name`, set it explicitly:"
+        }
       </p>
       <CodeBlock>
         {`ns init --database-id <database_id> --notes-root ./notes --title-property Title`}
       </CodeBlock>
       <p className="blog-content">{"this creates:"}</p>
       <CodeBlock>{`notes/
-  .notion-cli/
+  .ns-cli/
     config.json`}</CodeBlock>
 
       <br />
       <SectionTitle>{"directory mapping"}</SectionTitle>
       <p className="blog-content">
-        {"`ns link` maps a first-level subdirectory under `notes_root` to a Notion relation page id and the relation property name used on database pages."}
+        {
+          "`ns link` maps a first-level subdirectory under `notes_root` to a Notion relation page id and the relation property name used on database pages."
+        }
       </p>
       <p className="blog-content">{"example:"}</p>
       <CodeBlock>{`ns link project rel_123 notebook`}</CodeBlock>
-      <Bullet>{"- files under `notes/project/` sync against pages whose title equals the Markdown filename stem."}</Bullet>
-      <Bullet>{"- those pages must also have a `notebook` relation containing `rel_123`."}</Bullet>
+      <Bullet>
+        {
+          "- files under `notes/project/` sync against pages whose title equals the Markdown filename stem."
+        }
+      </Bullet>
+      <Bullet>
+        {
+          "- those pages must also have a `notebook` relation containing `rel_123`."
+        }
+      </Bullet>
       <Bullet>{"- only first-level directories are mapped."}</Bullet>
-      <Bullet>{"- `notes/project/daily/today.md` still uses the `project` mapping."}</Bullet>
+      <Bullet>
+        {"- `notes/project/daily/today.md` still uses the `project` mapping."}
+      </Bullet>
 
       <br />
       <SectionTitle>{"config format"}</SectionTitle>
-      <p className="blog-content">{"example `.notion-cli/config.json`:"}</p>
+      <p className="blog-content">{"example `.ns-cli/config.json`:"}</p>
       <CodeBlock>{`{
   "version": 1,
   "database_id": "db_test",
@@ -117,7 +145,9 @@ const DocumentOne = () => {
     }
   }
 }`}</CodeBlock>
-      <p className="blog-content">{"legacy mapping values are still accepted:"}</p>
+      <p className="blog-content">
+        {"legacy mapping values are still accepted:"}
+      </p>
       <CodeBlock>{`{
   "mappings": {
     "project": "rel_123"
@@ -131,7 +161,9 @@ const DocumentOne = () => {
       <SectionTitle>{"command reference"}</SectionTitle>
       <p className="blog-section-heading">{"`ns init`"}</p>
       <CodeBlock>{`ns init --database-id <id> --notes-root <path> [--title-property <name>] [--force]`}</CodeBlock>
-      <Bullet>{"- creates `.notion-cli/config.json` inside the notes root."}</Bullet>
+      <Bullet>
+        {"- creates `.ns-cli/config.json` inside the notes root."}
+      </Bullet>
       <Bullet>{"- `--force` overwrites an existing config."}</Bullet>
 
       <p className="blog-section-heading">{"`ns link`"}</p>
@@ -141,56 +173,120 @@ const DocumentOne = () => {
 
       <p className="blog-section-heading">{"`ns status`"}</p>
       <CodeBlock>{`ns status <file.md>`}</CodeBlock>
-      <Bullet>{"- shows title, notes root, mapping directory, relation page id, relation property, and exact query filter used for sync."}</Bullet>
-      <Bullet>{"- with no file argument, it prints the project config JSON."}</Bullet>
+      <Bullet>
+        {
+          "- shows title, notes root, mapping directory, relation page id, relation property, and exact query filter used for sync."
+        }
+      </Bullet>
+      <Bullet>
+        {"- with no file argument, it prints the project config JSON."}
+      </Bullet>
 
       <p className="blog-section-heading">{"`ns upload`"}</p>
       <CodeBlock>{`ns upload [--dry-run] <file.md>`}</CodeBlock>
-      <Bullet>{"- file must exist, end in `.md`, and be inside `notes_root`."}</Bullet>
-      <Bullet>{"- if the file is under a subdirectory, that first-level directory must be mapped."}</Bullet>
+      <Bullet>
+        {"- file must exist, end in `.md`, and be inside `notes_root`."}
+      </Bullet>
+      <Bullet>
+        {
+          "- if the file is under a subdirectory, that first-level directory must be mapped."
+        }
+      </Bullet>
       <Bullet>{"- root-level files are allowed without a mapping."}</Bullet>
-      <Bullet>{"- mapped files query by exact title plus exact relation membership."}</Bullet>
+      <Bullet>
+        {"- mapped files query by exact title plus exact relation membership."}
+      </Bullet>
       <Bullet>{"- root-level files query by exact title only."}</Bullet>
-      <Bullet>{"- if a single match exists, the existing remote page is archived, a new page is created, and Markdown blocks are appended to the new page."}</Bullet>
+      <Bullet>
+        {
+          "- if a single match exists, the existing remote page is archived, a new page is created, and Markdown blocks are appended to the new page."
+        }
+      </Bullet>
       <Bullet>{"- if no match exists, a new page is created."}</Bullet>
       <Bullet>{"- if multiple matches exist, the command fails."}</Bullet>
       <Bullet>{"- `--dry-run` prints intent only."}</Bullet>
 
       <p className="blog-section-heading">{"`ns upload-all`"}</p>
       <CodeBlock>{`ns upload-all [--dry-run]`}</CodeBlock>
-      <Bullet>{"- uploads all Markdown files under the current directory recursively."}</Bullet>
+      <Bullet>
+        {
+          "- uploads all Markdown files under the current directory recursively."
+        }
+      </Bullet>
       <Bullet>{"- this is a batch wrapper around `ns upload`."}</Bullet>
-      <Bullet>{"- it works on local files only, not on every page in the Notion database."}</Bullet>
+      <Bullet>
+        {
+          "- it works on local files only, not on every page in the Notion database."
+        }
+      </Bullet>
 
       <p className="blog-section-heading">{"`ns upload-sync`"}</p>
       <CodeBlock>{`ns upload-sync [--dry-run]`}</CodeBlock>
-      <Bullet>{"- current implementation behavior matches `ns upload-all`."}</Bullet>
+      <Bullet>
+        {"- current implementation behavior matches `ns upload-all`."}
+      </Bullet>
 
       <p className="blog-section-heading">{"`ns download`"}</p>
       <CodeBlock>{`ns download [--dry-run] <file.md>`}</CodeBlock>
-      <Bullet>{"- target path must end in `.md` and be inside `notes_root`."}</Bullet>
-      <Bullet>{"- if the path is under a subdirectory, that first-level directory must be mapped."}</Bullet>
+      <Bullet>
+        {"- target path must end in `.md` and be inside `notes_root`."}
+      </Bullet>
+      <Bullet>
+        {
+          "- if the path is under a subdirectory, that first-level directory must be mapped."
+        }
+      </Bullet>
       <Bullet>{"- root-level targets are allowed without a mapping."}</Bullet>
-      <Bullet>{"- mapped files query by exact title plus exact relation membership."}</Bullet>
+      <Bullet>
+        {"- mapped files query by exact title plus exact relation membership."}
+      </Bullet>
       <Bullet>{"- root-level files query by exact title only."}</Bullet>
-      <Bullet>{"- if a single match exists, the remote page is converted to Markdown, the target file is created or overwritten, and page properties and icon metadata are written to `.notion-cli/pages/...json`."}</Bullet>
+      <Bullet>
+        {
+          "- if a single match exists, the remote page is converted to Markdown, the target file is created or overwritten, and page properties and icon metadata are written to `.ns-cli/pages/...json`."
+        }
+      </Bullet>
       <Bullet>{"- if no match exists, the command fails."}</Bullet>
       <Bullet>{"- if multiple matches exist, the command fails."}</Bullet>
       <Bullet>{"- `--dry-run` prints intent only."}</Bullet>
 
       <p className="blog-section-heading">{"`ns download-all`"}</p>
       <CodeBlock>{`ns download-all [--dry-run]`}</CodeBlock>
-      <Bullet>{"- downloads every remote page in the current sync scope."}</Bullet>
+      <Bullet>
+        {"- downloads every remote page in the current sync scope."}
+      </Bullet>
       <Bullet>{"- from `notes_root`, it queries the full database."}</Bullet>
-      <Bullet>{"- inside a mapped first-level directory, it queries only pages whose mapped relation contains that directory's relation page id."}</Bullet>
-      <Bullet>{"- in a mapped scope, files download into that mapped directory."}</Bullet>
-      <Bullet>{"- in root scope, the CLI tries to infer a mapped directory from each page's relations."}</Bullet>
-      <Bullet>{"- if a page matches multiple directory mappings, the command fails for that page."}</Bullet>
-      <Bullet>{"- if no mapping matches, the page downloads to the root of `notes_root`."}</Bullet>
+      <Bullet>
+        {
+          "- inside a mapped first-level directory, it queries only pages whose mapped relation contains that directory's relation page id."
+        }
+      </Bullet>
+      <Bullet>
+        {"- in a mapped scope, files download into that mapped directory."}
+      </Bullet>
+      <Bullet>
+        {
+          "- in root scope, the CLI tries to infer a mapped directory from each page's relations."
+        }
+      </Bullet>
+      <Bullet>
+        {
+          "- if a page matches multiple directory mappings, the command fails for that page."
+        }
+      </Bullet>
+      <Bullet>
+        {
+          "- if no mapping matches, the page downloads to the root of `notes_root`."
+        }
+      </Bullet>
 
       <p className="blog-section-heading">{"`ns download-sync`"}</p>
       <CodeBlock>{`ns download-sync [--dry-run]`}</CodeBlock>
-      <Bullet>{"- downloads all Markdown files under the current directory recursively by calling `ns download` for each file path found locally."}</Bullet>
+      <Bullet>
+        {
+          "- downloads all Markdown files under the current directory recursively by calling `ns download` for each file path found locally."
+        }
+      </Bullet>
       <Bullet>{"- this command does not discover remote-only pages."}</Bullet>
 
       <p className="blog-section-heading">{"`ns completion`"}</p>
@@ -209,7 +305,11 @@ eval "$(ns completion zsh)"`}</CodeBlock>
       <Bullet>{"- no frontmatter title override exists."}</Bullet>
 
       <p className="blog-section-heading">{"mapping rules"}</p>
-      <Bullet>{"- only the first path segment under `notes_root` is used for relation mapping."}</Bullet>
+      <Bullet>
+        {
+          "- only the first path segment under `notes_root` is used for relation mapping."
+        }
+      </Bullet>
       <Bullet>{"- unmapped nested files fail."}</Bullet>
       <Bullet>{"- root-level files do not require a mapping."}</Bullet>
 
@@ -222,17 +322,29 @@ eval "$(ns completion zsh)"`}</CodeBlock>
       <br />
       <SectionTitle>{"metadata storage"}</SectionTitle>
       <p className="blog-content">
-        {"downloaded page properties and icon metadata are stored in sidecar JSON files under:"}
+        {
+          "downloaded page properties and icon metadata are stored in sidecar JSON files under:"
+        }
       </p>
-      <CodeBlock>{`.notion-cli/pages/`}</CodeBlock>
+      <CodeBlock>{`.ns-cli/pages/`}</CodeBlock>
       <p className="blog-content">{"for example:"}</p>
-      <CodeBlock>{`notes/.notion-cli/pages/project/today.json`}</CodeBlock>
+      <CodeBlock>{`notes/.ns-cli/pages/project/today.json`}</CodeBlock>
       <p className="blog-content">
-        {"the current upload flow reads these sidecars and uses them when recreating a page."}
+        {
+          "the current upload flow reads these sidecars and uses them when recreating a page."
+        }
       </p>
-      <Bullet>{"- downloaded Markdown files are written as plain Markdown body only."}</Bullet>
-      <Bullet>{"- the CLI currently does not embed `<!-- notion-properties ... -->` metadata blocks into the Markdown file body."}</Bullet>
-      <Bullet>{"- sidecar JSON is the active metadata source when present."}</Bullet>
+      <Bullet>
+        {"- downloaded Markdown files are written as plain Markdown body only."}
+      </Bullet>
+      <Bullet>
+        {
+          "- the CLI currently does not embed `<!-- notion-properties ... -->` metadata blocks into the Markdown file body."
+        }
+      </Bullet>
+      <Bullet>
+        {"- sidecar JSON is the active metadata source when present."}
+      </Bullet>
 
       <br />
       <SectionTitle>{"markdown support"}</SectionTitle>
@@ -261,7 +373,9 @@ eval "$(ns completion zsh)"`}</CodeBlock>
   Paragraph inside toggle
   - Nested item`}</CodeBlock>
       <p className="blog-content">
-        {"nested content is determined by indentation. the parser uses an indent width of 2 spaces."}
+        {
+          "nested content is determined by indentation. the parser uses an indent width of 2 spaces."
+        }
       </p>
 
       <p className="text-lg font-bold">{"callouts"}</p>
@@ -276,7 +390,9 @@ eval "$(ns completion zsh)"`}</CodeBlock>
 
       <p className="text-lg font-bold">{"code blocks"}</p>
       <p className="blog-content">
-        {"fenced code blocks are supported. unknown languages are normalized to `plain text`."}
+        {
+          "fenced code blocks are supported. unknown languages are normalized to `plain text`."
+        }
       </p>
       <p className="blog-content">{"language aliases include:"}</p>
       <Bullet>{"- `zsh` -> `shell`"}</Bullet>
@@ -313,10 +429,24 @@ ns download-all`}</CodeBlock>
 
       <br />
       <SectionTitle>{"known current behaviors"}</SectionTitle>
-      <Bullet>{"- `upload-all` and `upload-sync` currently behave the same."}</Bullet>
-      <Bullet>{"- `download-sync` works from local file discovery, not remote page discovery."}</Bullet>
-      <Bullet>{"- uploading a matched page archives the old page and recreates it instead of patching blocks in place."}</Bullet>
-      <Bullet>{"- Markdown property blocks are parsed if present, but normal downloads currently store metadata in sidecar JSON instead of writing those blocks back into Markdown."}</Bullet>
+      <Bullet>
+        {"- `upload-all` and `upload-sync` currently behave the same."}
+      </Bullet>
+      <Bullet>
+        {
+          "- `download-sync` works from local file discovery, not remote page discovery."
+        }
+      </Bullet>
+      <Bullet>
+        {
+          "- uploading a matched page archives the old page and recreates it instead of patching blocks in place."
+        }
+      </Bullet>
+      <Bullet>
+        {
+          "- Markdown property blocks are parsed if present, but normal downloads currently store metadata in sidecar JSON instead of writing those blocks back into Markdown."
+        }
+      </Bullet>
     </BlogLayout>
   );
 };
