@@ -59,7 +59,7 @@ const DocumentOne = () => {
         }
       </Bullet>
       <Bullet>
-        {"- stores downloaded page metadata in `.ns-cli/pages//*.json`."}
+        {"- stores downloaded page metadata in `.ns-cli/pages/*.json`."}
       </Bullet>
       <Bullet>{"- uploads Markdown to Notion."}</Bullet>
       <Bullet>{"- downloads Notion pages to Markdown."}</Bullet>
