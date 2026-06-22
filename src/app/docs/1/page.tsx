@@ -33,7 +33,7 @@ const DocumentOne = () => {
           className="inline-flex items-center gap-2 text-light-green underline underline-offset-4"
         >
           <FaGithub aria-hidden="true" />
-          <span>{"thedwncmpy/notion-cli"}</span>
+          <span>{"thedwncmpy/ns-cli"}</span>
         </Link>
       </p>
       <p className="blog-content">
@@ -55,11 +55,11 @@ const DocumentOne = () => {
       </Bullet>
       <Bullet>
         {
-          "- stores project config in `.notion-cli/config.json` under your notes root."
+          "- stores project config in `.ns-cli/config.json` under your notes root."
         }
       </Bullet>
       <Bullet>
-        {"- stores downloaded page metadata in `.notion-cli/pages//*.json`."}
+        {"- stores downloaded page metadata in `.ns-cli/pages//*.json`."}
       </Bullet>
       <Bullet>{"- uploads Markdown to Notion."}</Bullet>
       <Bullet>{"- downloads Notion pages to Markdown."}</Bullet>
@@ -81,9 +81,7 @@ const DocumentOne = () => {
         {"set `NOTION_TOKEN` in either of these places:"}
       </p>
       <CodeBlock>{`export NOTION_TOKEN="secret_xxx"`}</CodeBlock>
-      <p className="blog-content">
-        {"or in `~/.config/notion-cli/secrets.zsh`:"}
-      </p>
+      <p className="blog-content">{"or in `~/.config/ns-cli/secrets.zsh`:"}</p>
       <CodeBlock>{`export NOTION_TOKEN="secret_xxx"`}</CodeBlock>
       <p className="blog-content">
         {"environment variables take precedence over the secrets file."}

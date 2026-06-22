@@ -15,8 +15,8 @@ const Project = () => {
       </h3>
       <div>
         {featuredProjects.map((projectItem, id) => (
-          <Link href={projectItem.url} className="group" key={id}>
-            <h4 className="project-heading group-hover:text-light-green">
+          <Link href={projectItem.url} className="hover-group" key={id}>
+            <h4 className="project-heading hover-group-text">
               {projectItem.name}
             </h4>
             <div className="project-details text-light-grey">

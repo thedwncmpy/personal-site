@@ -17,8 +17,8 @@ export default function Projects() {
       <div>
         {visibleProjects.map((projectItem, id) => (
           <Link key={id} href={projectItem.url}>
-            <div className="my-10 border border-light-grey p-8 hover:border-light-green group">
-              <div className="text-3xl font-bold group-hover:text-light-green flex items-center justify-between">
+            <div className="hover-group my-10 border border-light-grey p-8">
+              <div className="hover-group-text flex items-center justify-between text-3xl font-bold">
                 {projectItem.name}
                 <span className="text-xl">
                   <HiArrowUpRight />

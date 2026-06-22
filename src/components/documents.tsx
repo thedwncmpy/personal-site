@@ -40,8 +40,8 @@ const DocumentList = () => {
       <div className="mt-5">
         {filteredDocuments.map((documentItem, id) => (
           <Link href={documentItem.url} key={id}>
-            <div className="flex items-center justify-between py-2 group">
-              <div className="text-xl transition-colors ease-in-out group-hover:text-light-green duration-400">
+            <div className="hover-group flex items-center justify-between py-2">
+              <div className="hover-group-text text-xl transition-colors duration-400 ease-in-out">
                 {selectedId === documentItem.id && (
                   <span className="mr-2 text-light-green">{"*"}</span>
                 )}

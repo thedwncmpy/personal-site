@@ -9,7 +9,11 @@ const Links = () => {
       </h3>
       <div className="flex gap-x-4">
         {urls.map((linkItem, id) => (
-          <Link href={linkItem.url} key={id} className="hover:text-light-green">
+          <Link
+            href={linkItem.url}
+            key={id}
+            className="hover-link"
+          >
             {linkItem.title}
           </Link>
         ))}

@@ -15,8 +15,8 @@ const Blogs = () => {
       <div className="my-5">
         {sortedBlogs.slice(0, 2).map((blogItem, id) => (
           <Link href={blogItem.url} key={id}>
-            <div className="py-2 flex items-center justify-between group">
-              <div className="text-xl group-hover:text-light-green transition-colors duration-400 ease-in-out">
+            <div className="hover-group flex items-center justify-between py-2">
+              <div className="hover-group-text text-xl transition-colors duration-400 ease-in-out">
                 {blogItem.name}
               </div>
               <div className="text-light-grey">{blogItem.displaydate}</div>

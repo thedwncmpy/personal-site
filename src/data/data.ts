@@ -105,7 +105,7 @@ export const projects = [
   {
     name: "drive clone",
     visible: true,
-    featured: true,
+    featured: false,
     role: "developer & creator",
     desc: "simple google drive clone with user management(clerk), rate limits, analytics(posthog), site health analytics(sentry), and file/image upload (uploadthing)",
     url: "https://drive-klone.netlify.app",
@@ -120,7 +120,7 @@ export const projects = [
   {
     name: "so plumbing inc",
     visible: true,
-    featured: true,
+    featured: false,
     role: "site creator & designer",
     desc: "in the process of remaking company site to something more modern, which displays company information(licenses and contact info)first and foremost",
     url: "https://so-plumbing-inc.vercel.app",
@@ -207,7 +207,7 @@ export const blogs = [
 export const documents = [
   {
     id: "1",
-    name: "notion-cli user guide",
+    name: "ns-cli user guide",
     displaydate: "jun 18 2026",
     date: "2026-06-18",
     url: "/docs/1",

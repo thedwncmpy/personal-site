@@ -80,8 +80,23 @@
   .accent-link {
     @apply text-light-green;
   }
+  .accent-link-hover:hover {
+    text-decoration-line: underline;
+    text-underline-offset: 4px;
+  }
   .projects-blob {
     @apply my-8;
+  }
+  .hover-link:hover {
+    @apply text-light-green;
+    text-decoration-line: underline;
+    text-underline-offset: 4px;
+  }
+  .hover-group:hover .hover-group-text {
+    @apply text-light-green;
+  }
+  .hover-group:hover {
+    @apply border-light-green;
   }
 
   .word-decoration {

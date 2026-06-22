@@ -79,7 +79,7 @@ const BlogThree = () => {
           href="https://tailscale.com/"
           target="_blank"
           rel="noopener noreferrer"
-          className="accent-link hover:underline"
+          className="accent-link accent-link-hover"
         >
           {"tailscale"}
         </a>
@@ -88,7 +88,7 @@ const BlogThree = () => {
           href="https://termius.com/"
           target="_blank"
           rel="noopener noreferrer"
-          className="accent-link hover:underline"
+          className="accent-link accent-link-hover"
         >
           {"termius"}
         </a>
@@ -99,7 +99,7 @@ const BlogThree = () => {
           href="https://github.com/edolivar/dot-files"
           target="_blank"
           rel="noopener noreferrer"
-          className="accent-link hover:underline"
+          className="accent-link accent-link-hover"
         >
           {"configs"}
         </a>
@@ -110,7 +110,7 @@ const BlogThree = () => {
           href="https://eruda.liriliri.io/"
           target="_blank"
           rel="noopener noreferrer"
-          className="accent-link hover:underline"
+          className="accent-link accent-link-hover"
         >
           {"eruda"}
         </a>
