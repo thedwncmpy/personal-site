@@ -59,7 +59,7 @@ const DocumentOne = () => {
         }
       </Bullet>
       <Bullet>
-        {"- stores downloaded page metadata in `.ns-cli/pages/*.json`."}
+        {"- stores downloaded page metadata in `.ns-cli/pages/**/*.json`."}
       </Bullet>
       <Bullet>{"- uploads Markdown to Notion."}</Bullet>
       <Bullet>{"- downloads Notion pages to Markdown."}</Bullet>
@@ -141,6 +141,16 @@ const DocumentOne = () => {
       "relation_page_id": "rel_123",
       "relation_property": "notebook"
     }
+  },
+  "watch": {
+    "default_cooldown_seconds": 60,
+    "files": {
+      "project/today.md": {
+        "enabled": true,
+        "cooldown_seconds": 60,
+        "last_uploaded_at": 1781899705
+      }
+    }
   }
 }`}</CodeBlock>
       <p className="blog-content">
@@ -204,24 +214,75 @@ const DocumentOne = () => {
       <Bullet>{"- if multiple matches exist, the command fails."}</Bullet>
       <Bullet>{"- `--dry-run` prints intent only."}</Bullet>
 
-      <p className="blog-section-heading">{"`ns upload-all`"}</p>
-      <CodeBlock>{`ns upload-all [--dry-run]`}</CodeBlock>
+      <p className="blog-section-heading">{"`ns upload-sync`"}</p>
+      <CodeBlock>{`ns upload-sync [--dry-run]`}</CodeBlock>
       <Bullet>
         {
           "- uploads all Markdown files under the current directory recursively."
         }
       </Bullet>
-      <Bullet>{"- this is a batch wrapper around `ns upload`."}</Bullet>
+
+      <p className="blog-section-heading">{"`ns watch`"}</p>
+      <CodeBlock>{`ns watch [<file.md>] [--enable|--disable] [--cooldown-seconds <n>]`}</CodeBlock>
       <Bullet>
         {
-          "- it works on local files only, not on every page in the Notion database."
+          "- `ns watch <file.md> --enable` enables auto-upload for one Markdown file."
+        }
+      </Bullet>
+      <Bullet>
+        {
+          "- `ns watch <file.md> --disable` disables auto-upload for one Markdown file."
+        }
+      </Bullet>
+      <Bullet>{"- bare `ns watch` runs the watcher loop."}</Bullet>
+      <Bullet>
+        {
+          "- the watcher scans `notes_root` for changed `.md` files but only uploads files that are explicitly enabled in config."
+        }
+      </Bullet>
+      <Bullet>
+        {"- it reuses the existing `ns upload` flow for each changed file."}
+      </Bullet>
+      <Bullet>
+        {"- it stores per-file state in `watch.files[<relative-path>]`."}
+      </Bullet>
+      <Bullet>
+        {
+          "- it stores per-file `last_uploaded_at` timestamps in project config."
+        }
+      </Bullet>
+      <Bullet>
+        {
+          "- it skips re-uploading the same file until the cooldown window expires."
+        }
+      </Bullet>
+      <Bullet>
+        {
+          "- successful sync operations append a hidden audit line to `.ns-cli/sync.log`."
         }
       </Bullet>
 
-      <p className="blog-section-heading">{"`ns upload-sync`"}</p>
-      <CodeBlock>{`ns upload-sync [--dry-run]`}</CodeBlock>
+      <p className="blog-section-heading">{"`ns watch-upload`"}</p>
+      <CodeBlock>{`ns watch-upload <file.md>`}</CodeBlock>
       <Bullet>
-        {"- current implementation behavior matches `ns upload-all`."}
+        {
+          "- uploads one Markdown file only if that file has watch enabled in config."
+        }
+      </Bullet>
+      <Bullet>
+        {
+          "- it reuses the same cooldown and `last_uploaded_at` behavior as `ns watch`."
+        }
+      </Bullet>
+      <Bullet>
+        {
+          "- it is intended for editor save hooks such as Neovim `BufWritePost`."
+        }
+      </Bullet>
+      <Bullet>
+        {
+          "- it resolves the matching `ns` project from the saved file path, so it does not depend on the editor's current working directory."
+        }
       </Bullet>
 
       <p className="blog-section-heading">{"`ns download`"}</p>
@@ -242,6 +303,30 @@ const DocumentOne = () => {
       <Bullet>
         {
           "- if a single match exists, the remote page is converted to Markdown, the target file is created or overwritten, and page properties and icon metadata are written to `.ns-cli/pages/...json`."
+        }
+      </Bullet>
+      <Bullet>{"- if no match exists, the command fails."}</Bullet>
+      <Bullet>{"- if multiple matches exist, the command fails."}</Bullet>
+      <Bullet>{"- `--dry-run` prints intent only."}</Bullet>
+
+      <p className="blog-section-heading">{"`ns delete`"}</p>
+      <CodeBlock>{`ns delete [--dry-run] <file.md>`}</CodeBlock>
+      <Bullet>
+        {"- target path must end in `.md` and be inside `notes_root`."}
+      </Bullet>
+      <Bullet>
+        {
+          "- if the path is under a subdirectory, that first-level directory must be mapped."
+        }
+      </Bullet>
+      <Bullet>{"- root-level targets are allowed without a mapping."}</Bullet>
+      <Bullet>
+        {"- mapped files query by exact title plus exact relation membership."}
+      </Bullet>
+      <Bullet>{"- root-level file queries use exact title only."}</Bullet>
+      <Bullet>
+        {
+          "- if a single match exists, the remote page is archived, the local Markdown file is deleted if present, and the matching `.ns-cli/pages/...json` sidecar is deleted if present."
         }
       </Bullet>
       <Bullet>{"- if no match exists, the command fails."}</Bullet>
@@ -359,8 +444,8 @@ eval "$(ns completion zsh)"`}</CodeBlock>
       <Bullet>{"- fenced code blocks"}</Bullet>
       <Bullet>{"- dividers `---`"}</Bullet>
       <Bullet>{"- `[TOC]`"}</Bullet>
-      <Bullet>{"- `[[link*to*page page_id:...]]`"}</Bullet>
-      <Bullet>{"- `[[link*to*page database_id:...]]`"}</Bullet>
+      <Bullet>{"- `[[link_to_page page_id:...]]`"}</Bullet>
+      <Bullet>{"- `[[link_to_page database_id:...]]`"}</Bullet>
 
       <p className="text-lg font-bold">{"toggle headings"}</p>
       <p className="blog-content">
@@ -424,12 +509,15 @@ ns download-all`}</CodeBlock>
       </p>
       <CodeBlock>{`cd ./notes
 ns download-all`}</CodeBlock>
+      <p className="blog-content">{"watch one file and run the watcher:"}</p>
+      <CodeBlock>{`ns watch project/today.md --enable --cooldown-seconds 60
+ns watch
+ns watch project/today.md --disable`}</CodeBlock>
+      <p className="blog-content">{"use `watch-upload` from an editor save hook:"}</p>
+      <CodeBlock>{`ns watch-upload project/today.md`}</CodeBlock>
 
       <br />
       <SectionTitle>{"known current behaviors"}</SectionTitle>
-      <Bullet>
-        {"- `upload-all` and `upload-sync` currently behave the same."}
-      </Bullet>
       <Bullet>
         {
           "- `download-sync` works from local file discovery, not remote page discovery."
