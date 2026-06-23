@@ -1,8 +1,25 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
 import BlogLayout from "@/components/blog-layout";
 import { documents as content } from "@/data/data";
+
+const tocSections = [
+  { id: "what-the-cli-does", label: "what the cli does" },
+  { id: "requirements", label: "requirements" },
+  { id: "authentication", label: "authentication" },
+  { id: "project-setup", label: "project setup" },
+  { id: "directory-mapping", label: "directory mapping" },
+  { id: "config-format", label: "config format" },
+  { id: "command-reference", label: "command reference" },
+  { id: "sync-rules", label: "sync rules" },
+  { id: "metadata-storage", label: "metadata storage" },
+  { id: "markdown-support", label: "markdown support" },
+  { id: "common-workflows", label: "common workflows" },
+  { id: "known-current-behaviors", label: "known current behaviors" },
+] as const;
 
 const CodeBlock = ({ children }: { children: string }) => (
   <div className="bg-[#1e1e1e] p-6 rounded-lg font-mono text-sm overflow-x-auto my-4">
@@ -12,8 +29,16 @@ const CodeBlock = ({ children }: { children: string }) => (
   </div>
 );
 
-const SectionTitle = ({ children }: { children: string }) => (
-  <p className="blog-section-heading">{children}</p>
+const SectionTitle = ({
+  children,
+  id,
+}: {
+  children: string;
+  id?: string;
+}) => (
+  <p id={id} className="blog-section-heading scroll-mt-24">
+    {children}
+  </p>
 );
 
 const Bullet = ({ children }: { children: React.ReactNode }) => (
@@ -21,10 +46,47 @@ const Bullet = ({ children }: { children: React.ReactNode }) => (
 );
 
 const DocumentOne = () => {
-  const document = content[0];
+  const doc = content[0];
+  const [activeSection, setActiveSection] = useState<string>(tocSections[0].id);
+
+  useEffect(() => {
+    const sectionElements = tocSections
+      .map((section) => document.getElementById(section.id))
+      .filter((element): element is HTMLElement => element !== null);
+
+    if (sectionElements.length === 0) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntries = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort(
+            (a, b) => a.boundingClientRect.top - b.boundingClientRect.top,
+          );
+
+        if (visibleEntries.length > 0) {
+          setActiveSection(visibleEntries[0].target.id);
+        }
+      },
+      {
+        rootMargin: "-20% 0px -65% 0px",
+        threshold: [0, 1],
+      },
+    );
+
+    sectionElements.forEach((element) => observer.observe(element));
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
-    <BlogLayout title={document.name} displaydate={document.displaydate}>
+    <BlogLayout title={doc.name} displaydate={doc.displaydate}>
+      <div className="xl:flex xl:items-start xl:gap-12">
+        <div className="min-w-0 flex-1">
       <p className="blog-content">
         <Link
           href="https://github.com/thedwncmpy/ns-cli.git"
@@ -48,7 +110,7 @@ const DocumentOne = () => {
       </p>
 
       <br />
-      <SectionTitle>{"what the cli does"}</SectionTitle>
+      <SectionTitle id="what-the-cli-does">{"what the cli does"}</SectionTitle>
       <Bullet>{"- uses exact filename-to-page-title matching."}</Bullet>
       <Bullet>
         {"- uses first-level directory mappings to scope relation-based sync."}
@@ -66,7 +128,7 @@ const DocumentOne = () => {
       <Bullet>{"- fails hard on ambiguous matches."}</Bullet>
 
       <br />
-      <SectionTitle>{"requirements"}</SectionTitle>
+      <SectionTitle id="requirements">{"requirements"}</SectionTitle>
       <Bullet>{"- `zsh`"}</Bullet>
       <Bullet>{"- `python3`"}</Bullet>
       <Bullet>{"- `jq`"}</Bullet>
@@ -76,7 +138,7 @@ const DocumentOne = () => {
       </Bullet>
 
       <br />
-      <SectionTitle>{"authentication"}</SectionTitle>
+      <SectionTitle id="authentication">{"authentication"}</SectionTitle>
       <p className="blog-content">
         {"set `NOTION_TOKEN` in either of these places:"}
       </p>
@@ -88,7 +150,7 @@ const DocumentOne = () => {
       </p>
 
       <br />
-      <SectionTitle>{"project setup"}</SectionTitle>
+      <SectionTitle id="project-setup">{"project setup"}</SectionTitle>
       <p className="blog-content">{"initialize a notes tree:"}</p>
       <CodeBlock>{`ns init --database-id <database_id> --notes-root ./notes`}</CodeBlock>
       <p className="blog-content">
@@ -105,7 +167,7 @@ const DocumentOne = () => {
     config.json`}</CodeBlock>
 
       <br />
-      <SectionTitle>{"directory mapping"}</SectionTitle>
+      <SectionTitle id="directory-mapping">{"directory mapping"}</SectionTitle>
       <p className="blog-content">
         {
           "`ns link` maps a first-level subdirectory under `notes_root` to a Notion relation page id and the relation property name used on database pages."
@@ -129,7 +191,7 @@ const DocumentOne = () => {
       </Bullet>
 
       <br />
-      <SectionTitle>{"config format"}</SectionTitle>
+      <SectionTitle id="config-format">{"config format"}</SectionTitle>
       <p className="blog-content">{"example `.ns-cli/config.json`:"}</p>
       <CodeBlock>{`{
   "version": 1,
@@ -166,7 +228,7 @@ const DocumentOne = () => {
       </p>
 
       <br />
-      <SectionTitle>{"command reference"}</SectionTitle>
+      <SectionTitle id="command-reference">{"command reference"}</SectionTitle>
       <p className="blog-section-heading">{"`ns init`"}</p>
       <CodeBlock>{`ns init --database-id <id> --notes-root <path> [--title-property <name>] [--force]`}</CodeBlock>
       <Bullet>
@@ -390,7 +452,7 @@ eval "$(ns completion zsh)"`}</CodeBlock>
       <CodeBlock>{`ns version`}</CodeBlock>
 
       <br />
-      <SectionTitle>{"sync rules"}</SectionTitle>
+      <SectionTitle id="sync-rules">{"sync rules"}</SectionTitle>
       <p className="blog-section-heading">{"title matching"}</p>
       <Bullet>{"- the page title is always the filename stem."}</Bullet>
       <CodeBlock>{`notes/project/today.md -> today`}</CodeBlock>
@@ -412,7 +474,7 @@ eval "$(ns completion zsh)"`}</CodeBlock>
       <Bullet>{"- target outside `notes_root` is an error."}</Bullet>
 
       <br />
-      <SectionTitle>{"metadata storage"}</SectionTitle>
+      <SectionTitle id="metadata-storage">{"metadata storage"}</SectionTitle>
       <p className="blog-content">
         {
           "downloaded page properties and icon metadata are stored in sidecar JSON files under:"
@@ -439,7 +501,7 @@ eval "$(ns completion zsh)"`}</CodeBlock>
       </Bullet>
 
       <br />
-      <SectionTitle>{"markdown support"}</SectionTitle>
+      <SectionTitle id="markdown-support">{"markdown support"}</SectionTitle>
       <p className="blog-content">
         {"supported Markdown-to-Notion conversions include:"}
       </p>
@@ -496,7 +558,7 @@ eval "$(ns completion zsh)"`}</CodeBlock>
       <Bullet>{"- `md` -> `markdown`"}</Bullet>
 
       <br />
-      <SectionTitle>{"common workflows"}</SectionTitle>
+      <SectionTitle id="common-workflows">{"common workflows"}</SectionTitle>
       <p className="blog-content">{"initialize and upload one file:"}</p>
       <CodeBlock>{`export NOTION_TOKEN="secret_xxx"
 ns init --database-id <db_id> --notes-root ./notes
@@ -526,7 +588,7 @@ ns watch project/today.md --disable`}</CodeBlock>
       <CodeBlock>{`ns watch-upload project/today.md`}</CodeBlock>
 
       <br />
-      <SectionTitle>{"known current behaviors"}</SectionTitle>
+      <SectionTitle id="known-current-behaviors">{"known current behaviors"}</SectionTitle>
       <Bullet>
         {
           "- `download-sync` works from local file discovery, not remote page discovery."
@@ -542,6 +604,35 @@ ns watch project/today.md --disable`}</CodeBlock>
           "- Markdown property blocks are parsed if present, but normal downloads currently store metadata in sidecar JSON instead of writing those blocks back into Markdown."
         }
       </Bullet>
+        </div>
+
+        <aside className="hidden xl:block xl:w-64 xl:shrink-0 xl:self-start xl:sticky xl:top-24">
+          <div className="rounded-2xl border border-white/10 bg-black/20 px-5 py-4">
+            <p className="mb-3 text-xs uppercase tracking-[0.28em] text-light-green">
+              {"On this page"}
+            </p>
+            <nav aria-label="Table of contents">
+              <ul className="space-y-2 text-sm leading-6 text-white/70">
+                {tocSections.map((section) => (
+                  <li key={section.id}>
+                    <a
+                      href={`#${section.id}`}
+                      onClick={() => setActiveSection(section.id)}
+                      className={`block underline-offset-4 transition-colors ${
+                        activeSection === section.id
+                          ? "text-white underline"
+                          : "text-white/70 hover:text-light-green"
+                      }`}
+                    >
+                      {section.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+        </aside>
+      </div>
     </BlogLayout>
   );
 };
