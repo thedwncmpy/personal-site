@@ -25,7 +25,7 @@ export const profile = {
   name: "edwin jim olivares",
   location: "los angeles, ca",
   current: "software engineer",
-  desc: "usually just working on some personal projects to learn about the new technologies. bad habit of looking for green checkmark on stackoverflow.",
+  desc: "usually just working on some personal projects to learn new technologies. bad habit of looking for green checkmark on stackoverflow.",
 };
 
 export const work = [
