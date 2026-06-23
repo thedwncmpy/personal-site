@@ -222,6 +222,15 @@ const DocumentOne = () => {
         }
       </Bullet>
 
+      <p className="blog-section-heading">{"`ns rename`"}</p>
+      <CodeBlock>{`ns rename <old-path.md> <new-path.md>`}</CodeBlock>
+      <Bullet>{"- renames a note locally and in Notion."}</Bullet>
+      <Bullet>
+        {
+          "- example: `ns rename project/today.md archive/weekly-summary.md`"
+        }
+      </Bullet>
+
       <p className="blog-section-heading">{"`ns watch`"}</p>
       <CodeBlock>{`ns watch [<file.md>] [--enable|--disable] [--cooldown-seconds <n>]`}</CodeBlock>
       <Bullet>
